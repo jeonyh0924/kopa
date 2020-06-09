@@ -1,4 +1,4 @@
-FROM        ecs-deploy:base
+FROM        jeonyh0924/kopa:base
 
 COPY        ./ /srv/projects
 

@@ -1,17 +1,15 @@
-FROM                        python:3.6.7-slim
-MAINTAINER                  teachmesomething2580@gmail.com
+FROM        python:3.7.4-slim
+MAINTAINER  hungyb0924@gmail.com
 
-ENV                         DJANGO_SETTINGS_MODULE  config.settings.production
-ENV                         LANG                    C.UTF-8
-ENV                         LC_ALL                  C.UTF-8
+ENV        DJANGO_SETTINGS_MODULE config.settings.production
+ENV        LAN                    C.UTF-8
 
-RUN                         apt -y update
-RUN                         apt -y dist-upgrade
-RUN                         apt -y install supervisor nginx && \
-                            pip3 install gunicorn && \
-                            pip3 install pipenv
+RUN        apt-get -y -qq update
+RUN        apt-get -y -qq dist-upgrade
+RUN        apt-get -y install supervisor nginx && \
+           pip install gunicorn
 
-COPY                        Pipfile /tmp/Pipfile
-COPY                        Pipfile.lock /tmp/Pipfile.lock
-WORKDIR                     /tmp/
-RUN                         pipenv install --system --ignore-pipfile
+# requirements.txt파일만 복사 후, 패키지 설치
+# requirements.txt파일의 내용이 바뀌지 않으면 pip3 install ..부분이 재실행되지 않음
+COPY            requirements-production.txt    /tmp/requirements.txt
+RUN             pip install -r     /tmp/requirements.txt

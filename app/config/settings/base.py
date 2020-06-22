@@ -18,29 +18,46 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
+# user model
+AUTH_USER_MODEL = 'members.User'
 
 SECRET_JSON = json.load(open(os.path.join(SECRET_DIR, 'secret.json')))
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = SECRET_JSON['SECRET_KEY']
 SECRET_KEY = "4e+n)vnn_z)&r9%&4lh#+omtgkq7#v&de3rh)n#ky*p(#gp8mz"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+# static root는 collect static 할 때 파일이 모인다. 단, staticfilestorage를 filesystemstorage로 지정 했을 때
+STATIC_ROOT = os.path.join(ROOT_DIR, '.static')
 STATIC_URL = '/static/'
 
-# Application definition
+MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
+MEDIA_URL = '/media/'
 
+# s3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = SECRET_JSON['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = SECRET_JSON['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = 'kopa-s3'
+AWS_AUTO_CREATE_BUCKET = True
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+
+tourAPI_key = SECRET_JSON['TourAPI']
+
+# Application definition
 INSTALLED_APPS = [
+    'members',
+    'tours',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_extensions',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -89,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -98,4 +114,3 @@ TIME_ZONE = 'Asia/Seoul'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-

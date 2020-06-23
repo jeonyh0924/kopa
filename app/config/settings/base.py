@@ -22,7 +22,7 @@ SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 AUTH_USER_MODEL = 'members.User'
 
 SECRET_JSON = json.load(open(os.path.join(SECRET_DIR, 'secret.json')))
-SECRET_KEY = "4e+n)vnn_z)&r9%&4lh#+omtgkq7#v&de3rh)n#ky*p(#gp8mz"
+SECRET_KEY = SECRET_JSON['SECRET_KEY']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

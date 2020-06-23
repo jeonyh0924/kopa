@@ -3,6 +3,32 @@
 - python 3.7.4
 - django 2.2.12
 
+## installation
+```shell
+  pip freeze > requirements.txt
+```
+
+```shell
+# secret.json
+{
+  "SECRET_KEY": "<django key>",
+  "AWS_ACCESS_KEY_ID":"< AWS s3 KEY>",
+  "AWS_SECRET_ACCESS_KEY": "< AWS s3 secret key>",
+  "TourAPI" :"<관광공사 open api >"
+}
+
+# dev.json, production.json
+{
+  "DATABASES": {
+    "default": {
+      "ENGINE": "django.db.backends.sqlite3",
+      "NAME": "db.sqlite3"
+    }
+  }
+}
+
+```
+
 # deploy
 
 - ecs

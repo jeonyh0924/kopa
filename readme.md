@@ -5,7 +5,16 @@
 
 ## installation
 ```shell
-  pip install -r requirements.txt
+
+  pyenv virtualenv 3.7.4 <가상환경 이름>
+  pyenv local <가상환경 이름>
+  pip install django
+
+  pip install -r requiremens.text
+  cd app
+  ./manage.py makemigrations
+  ./manage.py migrate
+  ./manage.py createsuperuser
 ```
 
 ```shell

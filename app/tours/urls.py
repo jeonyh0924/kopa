@@ -1,8 +1,8 @@
 from django.urls import path
 
-from tours.views import tourAPI, otherRequsetAPI
+from tours.views import tourAPI
 
 urlpatterns = [
     path('', tourAPI),
-    path('other/', otherRequsetAPI),
+    # path('other/', otherRequsetAPI),
 ]

@@ -1,17 +1,13 @@
-from collections import defaultdict
-
-import requests
 import json
+import requests
 
 # Create your views here.
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
 from config.settings.base import tourAPI_key
 
 
-# f'listYN=Y&arrange=A&mapX=126.981611&mapY=37.568477&radius=1000').content
 @api_view(['GET'])
 def tourAPI(request):
     import xmltodict

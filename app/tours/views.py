@@ -61,3 +61,8 @@ def tourAPI(request):
         'result': first_request,
     }
     return Response(data, status=status.HTTP_200_OK)
+
+
+# merge 하고 이 함수가 없어서 error가 나길래 일단 임시로 만들어 놓았습니다.
+def otherRequsetAPI():
+    pass

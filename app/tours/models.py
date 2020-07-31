@@ -20,29 +20,11 @@ class Place(models.Model):
     phone_number = models.CharField(max_length=100, help_text='관광지 전화번호')
     open_time = models.CharField(max_length=100, help_text='관광지 오픈 시간')
     url = models.URLField(max_length=200, help_text='관광지 관련 URL')
-
-    # place info manytomany
-    # review = models.ManyToManyField(
-    #     User,
-    #     through='PlaceReview',
-    #     related_name='review_place_set',
-    #     help_text='관광지 후기')
+    trans = models.CharField(max_length=255, help_text='관광지 교통편')
     tags = models.ManyToManyField(
         Tag,
         verbose_name='해시태그 목록',
         help_text='관광지 태그 목록')
-    # place_like = models.ManyToManyField(
-    #     User,
-    #     through='PlaceLike',
-    #     related_name='like_place_set',
-    #     help_text='관광지 좋아요')
-
-    # # 카테고리 manytomany
-    # celebrity = models.ManyToManyField(
-    #     'Celebrity',
-    #     through='CelebrityCategory',
-    #     related_name='celebrity_places_set',
-    #     help_text='관광지 관련 연예인')
 
     # my list
     release_date = models.DateTimeField(auto_now_add=True)
@@ -117,15 +99,6 @@ class Celebrity(models.Model):
 
     def __str__(self):
         return f'연예인 {self.name}'
-
-
-# # 중간모델 역할만
-# class KPopCategory(models.Model):
-#     place = models.ForeignKey('Place', related_name='kpopcategories', on_delete=models.CASCADE)
-#     kpop_content = models.ForeignKey('KPopContent', on_delete=models.CASCADE, related_name='kpopcategories')
-#
-#     def __str__(self):
-#         return f' {self.place}와 관련된 KPOP Content {self.kpop_content} '
 
 
 class KPopContent(models.Model):

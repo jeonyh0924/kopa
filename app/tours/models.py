@@ -24,27 +24,27 @@ class Place(models.Model):
     url = models.URLField(max_length=200, help_text='관광지 관련 URL')
 
     # place info manytomany
-    review = models.ManyToManyField(
-        User,
-        through='PlaceReview',
-        related_name='review_place_set',
-        help_text='관광지 후기')
+    # review = models.ManyToManyField(
+    #     User,
+    #     through='PlaceReview',
+    #     related_name='review_place_set',
+    #     help_text='관광지 후기')
     tags = models.ManyToManyField(
         Tag,
         verbose_name='해시태그 목록',
         help_text='관광지 태그 목록')
-    place_like = models.ManyToManyField(
-        User,
-        through='PlaceLike',
-        related_name='like_place_set',
-        help_text='관광지 좋아요')
+    # place_like = models.ManyToManyField(
+    #     User,
+    #     through='PlaceLike',
+    #     related_name='like_place_set',
+    #     help_text='관광지 좋아요')
 
-    # 카테고리 manytomany
-    celebrity = models.ManyToManyField(
-        'Celebrity',
-        through='CelebrityCategory',
-        related_name='celebrity_places_set',
-        help_text='관광지 관련 연예인')
+    # # 카테고리 manytomany
+    # celebrity = models.ManyToManyField(
+    #     'Celebrity',
+    #     through='CelebrityCategory',
+    #     related_name='celebrity_places_set',
+    #     help_text='관광지 관련 연예인')
 
     # my list
     release_date = models.DateTimeField(auto_now_add=True)
@@ -88,7 +88,7 @@ class PlaceLike(models.Model):
 
 
 class ReviewComment(models.Model):
-    review = models.OneToOneField('PlaceReview', on_delete=models.CASCADE)
+    review = models.ForeignKey('PlaceReview', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -112,7 +112,7 @@ class Celebrity(models.Model):
         ('SINGER', 'SINGER'),
         ('ACTOR', 'ACTOR'),
         ('TALENT', 'TALENT'),
-        ('DIRECTOR','DIRECTOR')
+        ('DIRECTOR', 'DIRECTOR')
     )
     name = models.CharField(max_length=100)
     profession = models.CharField(max_length=20, choices=PROFESSION)
@@ -121,13 +121,13 @@ class Celebrity(models.Model):
         return f'연예인 {self.name}'
 
 
-# 중간모델 역할만
-class KPopCategory(models.Model):
-    place = models.ForeignKey('Place', related_name='kpopcategories', on_delete=models.CASCADE)
-    kpop_content = models.ForeignKey('KPopContent', on_delete=models.CASCADE, related_name='kpopcategories')
-
-    def __str__(self):
-        return f' {self.place}와 관련된 KPOP Content {self.kpop_content} '
+# # 중간모델 역할만
+# class KPopCategory(models.Model):
+#     place = models.ForeignKey('Place', related_name='kpopcategories', on_delete=models.CASCADE)
+#     kpop_content = models.ForeignKey('KPopContent', on_delete=models.CASCADE, related_name='kpopcategories')
+#
+#     def __str__(self):
+#         return f' {self.place}와 관련된 KPOP Content {self.kpop_content} '
 
 
 class KPopContent(models.Model):
@@ -145,6 +145,7 @@ class KPopContent(models.Model):
         (TYPE_CELEB, '셀럽'),
         (TYPE_GROUP, '그룹'),
     )
+    place = models.ForeignKey('Place', related_name='kpopcategories', on_delete=models.CASCADE)
     content_type = models.CharField('타입', max_length=2, choices=CHOICES_TYPE, default=TYPE_KOREA_CULTURE)
     title = models.CharField('컨텐츠 제목', max_length=100)
     celebrity = models.ForeignKey(Celebrity, on_delete=models.CASCADE, blank=True, null=True)

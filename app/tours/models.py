@@ -1,9 +1,7 @@
+from django.db import models
 import re
 
-from django.conf import settings
-from django.db import models
-
-from members.models import User, MyList
+from members.models import User
 
 
 class Tag(models.Model):

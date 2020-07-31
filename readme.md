@@ -1,11 +1,24 @@
 # KOPA
+- 관광공사에서 제공하는 Open API를 활용하여 디바이스 주변의 관광지를 추천
+- 유명 셀럽들이 운영하는 장소 추천.
+- 서울시에서 제공하는 테마 관광을 제공
+- 지정한 관광지에 따른 데이터를 ios에서 동적으로 제공
 
+## installation
 - python 3.7.4
 - django 2.2.12
 
-## installation
 ```shell
-  pip freeze > requirements.txt
+
+  pyenv virtualenv 3.7.4 <가상환경 이름>
+  pyenv local <가상환경 이름>
+  pip install django
+
+  pip install -r requiremens.text
+  cd app
+  ./manage.py makemigrations
+  ./manage.py migrate
+  ./manage.py createsuperuser
 ```
 
 ```shell

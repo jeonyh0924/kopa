@@ -72,8 +72,8 @@ class PlaceReview(models.Model):
     evaluated_score = models.PositiveSmallIntegerField(default=0, help_text='관광지 평가 점수')
     release_date = models.DateTimeField(auto_now_add=True, help_text='후기 생성된 시간')
 
-    def __str__(self):
-        return f'{self.place}의 후기 {self.title}'
+    # def __str__(self):
+    #     return f'{self.place}의 후기 {self.title}'
 
 
 class PlaceLike(models.Model):
@@ -87,10 +87,11 @@ class PlaceLike(models.Model):
 
 class ReviewComment(models.Model):
     review = models.ForeignKey('PlaceReview', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,)
     title = models.CharField(max_length=100)
     content = models.TextField()
     release_date = models.DateTimeField(auto_now_add=True)
+    password = models.CharField(max_length=20)
 
     def __str__(self):
         return f'{self.review}의 댓글'

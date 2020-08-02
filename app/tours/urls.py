@@ -1,8 +1,14 @@
 from django.urls import path
+from rest_framework import routers
 
-from tours.views import tourAPI, otherRequsetAPI
+from tours.apis import ReviewAPIView
+from tours.views import tourAPI
 
 urlpatterns = [
     path('', tourAPI),
-    path('other/', otherRequsetAPI),
 ]
+
+router = routers.SimpleRouter()
+router.register('review', ReviewAPIView)
+
+urlpatterns += router.urls

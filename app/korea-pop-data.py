@@ -12,7 +12,7 @@ import json
 import urllib
 from urllib.parse import unquote
 
-from tours.models import KPopContent, Place
+from tours.models import *
 
 
 def kpop_crawler_url(kpop_url_list=dict()):
@@ -202,3 +202,18 @@ for title in json_data:
 
     except:
         print('다른 페이지 오류를 어떻게 잡지')
+
+
+celeb_list = ['강다니엘', '세븐틴', '엑소', '몬스타엑스', '방탄소년단','아미','오마이걸', '규현', '아이즈원', '뉴이스트', 'TXT', '갓세븐', 'NCT', 'BTS', '블랙핑크', '위너', '유노윤호', '산다라박', '이하이', '이수현','워너원','동할배', '빅뱅', '소년24']
+
+profession = 'SINGER'
+for name in celeb_list:
+    celeb, _ = Celebrity.objects.get_or_create(
+        name = name,
+        profession = profession,
+    )
+    
+    kpopcontent_list = KPopContent.objects.filter(title__contains=celeb.name)
+    for content in kpopcontent_list:
+        content.celebrity = celeb
+        content.save()

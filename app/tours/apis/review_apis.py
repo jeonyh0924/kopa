@@ -1,10 +1,11 @@
 from rest_framework import status
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from tours.models import ReviewComment
+from tours.models import ReviewComment, Place
 from tours.permissions import IsOwnerOrReadOnly
-from tours.serializers import ReviewCommentSerializer
+from tours.serializers import ReviewCommentSerializer, PlaceSerializer, PlaceDetailSerializer
 
 
 class ReviewAPIView(ModelViewSet):
@@ -36,3 +37,5 @@ class ReviewAPIView(ModelViewSet):
         if self.action in ['partial_update', 'destroy']:
             return [IsOwnerOrReadOnly()]
         return super().get_permissions()
+
+

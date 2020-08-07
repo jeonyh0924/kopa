@@ -23,6 +23,7 @@ from config import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tours.urls')),
+    path('members/', include('members.urls')),
 ]
 
 urlpatterns += static(settings.base.MEDIA_URL, document_root=settings.base.MEDIA_ROOT)

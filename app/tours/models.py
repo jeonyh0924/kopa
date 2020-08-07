@@ -1,7 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 import re
 
-from members.models import User
+User = get_user_model()
 
 
 class Tag(models.Model):
@@ -87,7 +88,7 @@ class PlaceLike(models.Model):
 
 class ReviewComment(models.Model):
     review = models.ForeignKey('PlaceReview', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, )
     title = models.CharField(max_length=100)
     content = models.TextField()
     release_date = models.DateTimeField(auto_now_add=True)

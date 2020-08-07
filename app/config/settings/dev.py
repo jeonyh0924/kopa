@@ -18,8 +18,10 @@ STATICFILES_DIRS = [
 
 WSGI_APPLICATION = 'config.wsgi.dev.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = DEV_JSON['DATABASES']
+
+# django - inmemory storage
+DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
